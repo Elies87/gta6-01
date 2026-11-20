@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PALMERA — Neon Tide City</title>
+<link rel="stylesheet" href="./style.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.min.js" } }
+</script>
+</head>
+<body>
+<div id="game-container"></div>
+
+<div id="hud">
+  <div id="flash"></div>
+  <div class="top-left">
+    <div id="cash">$120</div>
+    <div class="sub-row"><span id="clock">18:24</span> · <span id="district">Downtown</span></div>
+    <div id="healthbar"><div id="healthfill"></div></div>
+  </div>
+  <div id="stars">☆☆☆☆☆</div>
+  <div id="banner"><div id="banner-title"></div><div id="banner-sub"></div></div>
+  <div id="toast"></div>
+  <div id="objective"></div>
+  <div class="bottom-left">
+    <canvas id="minimap" width="168" height="168"></canvas>
+  </div>
+  <div class="bottom-right">
+    <div id="speedo">0 km/h</div>
+    <div id="weapon">FIST</div>
+  </div>
+  <div id="bust-wrap"><div class="bust-label">BUSTED</div><div id="bust-track"><div id="bust-fill"></div></div></div>
+  <div id="prompt"></div>
+  <div id="dialog"><div id="dialog-name">Mira</div><div id="dialog-text"></div><div class="dialog-hint">E / Space ▸</div></div>
+</div>
+
+<div id="title-screen" class="screen">
+  <div class="title-card">
+    <h1>PALMERA</h1>
+    <div class="tagline">NEON TIDE CITY</div>
+    <p class="blurb">An original open-world crime game. Steal cars, run jobs for Mira,
+    dodge the Palmera PD, and own the neon streets — on foot and behind the wheel.</p>
+    <div class="title-buttons">
+      <button id="btn-new">NEW GAME</button>
+      <button id="btn-continue">CONTINUE</button>
+    </div>
+    <div class="controls">
+      <div><b>W A S D</b> move / drive</div><div><b>Mouse</b> camera (drag or pointer lock)</div>
+      <div><b>Shift</b> run</div><div><b>F</b> enter / steal / exit car</div>
+      <div><b>E</b> talk / advance dialog</div><div><b>Click / J</b> punch or shoot</div>
+      <div><b>1 / 2</b> fist / pistol</div><div><b>R</b> reload</div>
+      <div><b>P</b> pause</div><div><b>M</b> mute</div>
+    </div>
+    <div class="fineprint">A work of fiction. Any resemblance to real cities, crews or games is purely coincidental.</div>
+  </div>
+</div>
+
+<div id="pause-screen" class="screen">
+  <div class="title-card">
+    <h1>PAUSED</h1>
+    <div class="title-buttons">
+      <button id="btn-resume">RESUME</button>
+      <button id="btn-save">SAVE GAME</button>
+      <button id="btn-title">TITLE SCREEN</button>
+    </div>
+  </div>
+</div>
+
+<div id="busted-screen" class="screen verdict"><div>BUSTED</div></div>
+<div id="wasted-screen" class="screen verdict"><div>WASTED</div></div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

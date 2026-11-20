@@ -1,0 +1,63 @@
+/* PALMERA — Neon Tide City: gaya HUD dan layar. Senja neon: ungu tua, oranye matahari
+   terbenam, aksen emas. Semua font sistem, tanpa unduhan apa pun. */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #17122b; }
+body { font-family: "Segoe UI", Arial, Helvetica, sans-serif; color: #fff; }
+#game-container, #game-container canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+#hud { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+#flash { position: absolute; inset: 0; background: #e23b2e; opacity: 0; }
+
+.top-left { position: absolute; top: 16px; left: 18px; text-shadow: 0 2px 6px rgba(0,0,0,0.7); }
+#cash { font-size: 30px; font-weight: 800; color: #7be495; letter-spacing: 0.5px; }
+.sub-row { font-size: 14px; opacity: 0.9; margin-top: 2px; }
+#healthbar { width: 190px; height: 12px; background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.35); margin-top: 7px; border-radius: 3px; overflow: hidden; }
+#healthfill { height: 100%; width: 100%; background: #53d769; transition: width 0.15s; }
+
+#stars { position: absolute; top: 14px; right: 20px; font-size: 30px; letter-spacing: 4px; text-shadow: 0 2px 6px rgba(0,0,0,0.7); }
+
+#banner { position: absolute; top: 15%; left: 0; right: 0; text-align: center; display: none; }
+#banner-title { font-size: 44px; font-weight: 900; letter-spacing: 6px; color: #ffd94d; text-shadow: 0 3px 0 #a33e1f, 0 6px 22px rgba(0,0,0,0.8); }
+#banner-sub { font-size: 18px; margin-top: 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.9); }
+
+#toast { position: absolute; top: 27%; left: 0; right: 0; text-align: center; font-size: 17px; color: #ffe9a8; text-shadow: 0 2px 8px rgba(0,0,0,0.9); display: none; }
+
+#objective { position: absolute; top: 64px; left: 0; right: 0; text-align: center; font-size: 16px; font-weight: 700; color: #ffd94d; text-shadow: 0 2px 6px rgba(0,0,0,0.85); display: none; }
+
+.bottom-left { position: absolute; left: 18px; bottom: 18px; }
+#minimap { border-radius: 50%; border: 2px solid rgba(255,255,255,0.4); box-shadow: 0 4px 18px rgba(0,0,0,0.6); background: #232733; }
+
+.bottom-right { position: absolute; right: 20px; bottom: 18px; text-align: right; text-shadow: 0 2px 6px rgba(0,0,0,0.7); }
+#speedo { font-size: 26px; font-weight: 800; display: none; }
+#weapon { font-size: 16px; font-weight: 700; letter-spacing: 1px; opacity: 0.95; }
+
+#bust-wrap { position: absolute; left: 50%; bottom: 24%; transform: translateX(-50%); width: 300px; text-align: center; display: none; }
+.bust-label { font-size: 20px; font-weight: 900; letter-spacing: 5px; color: #ff5a4d; text-shadow: 0 2px 8px rgba(0,0,0,0.9); }
+#bust-track { height: 10px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.4); margin-top: 5px; }
+#bust-fill { height: 100%; width: 0; background: #ff5a4d; }
+
+#prompt { position: absolute; left: 0; right: 0; bottom: 15%; text-align: center; font-size: 18px; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.9); display: none; }
+
+#dialog { position: absolute; left: 50%; bottom: 5%; transform: translateX(-50%); width: min(680px, 86vw); background: rgba(12, 8, 26, 0.88); border: 1px solid #ffd94d; border-radius: 8px; padding: 14px 18px 10px; display: none; }
+#dialog-name { color: #ffd94d; font-weight: 800; letter-spacing: 1px; margin-bottom: 5px; }
+#dialog-text { font-size: 17px; line-height: 1.45; }
+.dialog-hint { text-align: right; font-size: 12px; opacity: 0.7; margin-top: 6px; }
+
+.screen { position: fixed; inset: 0; z-index: 10; display: none; align-items: center; justify-content: center; background: radial-gradient(ellipse at 50% 65%, rgba(255,122,72,0.20), rgba(10,6,24,0.55) 65%); }
+.title-card { text-align: center; max-width: 640px; padding: 34px 40px; background: rgba(14, 9, 30, 0.78); border: 1px solid rgba(255,217,77,0.5); border-radius: 14px; box-shadow: 0 18px 60px rgba(0,0,0,0.65); }
+.title-card h1 { font-size: 64px; font-weight: 900; letter-spacing: 10px; color: #ffd94d; text-shadow: 0 4px 0 #a33e1f, 0 10px 34px rgba(0,0,0,0.8); }
+.tagline { font-size: 19px; letter-spacing: 9px; color: #ff9a5c; margin-top: 2px; }
+.blurb { margin: 16px 0 20px; font-size: 15px; line-height: 1.5; opacity: 0.92; }
+.title-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.title-buttons button { pointer-events: auto; cursor: pointer; font-size: 16px; font-weight: 800; letter-spacing: 1px; padding: 11px 22px; border-radius: 8px; border: 1px solid #ffd94d; background: #ffd94d; color: #231303; }
+.title-buttons button:hover { background: #ffe27a; }
+.title-buttons button.disabled { opacity: 0.4; cursor: default; }
+.controls { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 18px; text-align: left; margin: 20px auto 4px; max-width: 480px; font-size: 13.5px; opacity: 0.9; }
+.controls b { color: #ffd94d; }
+.fineprint { margin-top: 14px; font-size: 11.5px; opacity: 0.6; }
+
+.verdict { background: rgba(10, 4, 14, 0.55); }
+.verdict div { font-size: 84px; font-weight: 900; letter-spacing: 14px; }
+#busted-screen div { color: #6db9ff; text-shadow: 0 6px 30px rgba(0,0,0,0.9); }
+#wasted-screen div { color: #e23b2e; text-shadow: 0 6px 30px rgba(0,0,0,0.9); }
